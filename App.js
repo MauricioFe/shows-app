@@ -9,7 +9,6 @@ export default function App() {
   return (
     <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen component={Home} name="Series inc"/>
         </Stack.Navigator>
     </NavigationContainer>
   )
