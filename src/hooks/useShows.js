@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 import api from '../services/api';
 export function useShows() {
-    const [listShow, setListShows] = useState(null)
+    const { state, dispatch } = useContext(AppContext);
     useEffect(() => {
         api.get("/shows").then((response) => {
-            setListShows(response.data)
+            const action = { type: "createList", payload: response.data }
+            dispatch(action)
         });
     }, []);
 
-    return { shows: listShow };
+    return { shows: state.showList };
 }
