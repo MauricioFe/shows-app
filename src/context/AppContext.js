@@ -13,6 +13,10 @@ export const appReducer = (state, action) => {
             return { showList: action.payload };
         case "setItemSelected":
             return { ...state, itemSelected: action.payload };
+        case "addItem":
+            const showList = state.showList;
+            showList.push(action.payload);
+            return { ...state, showList };
         default:
             return state;
     }
