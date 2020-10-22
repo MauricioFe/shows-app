@@ -1,35 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, FlatList, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import api from '../../services/api';
 
-const shows = {
-    items: [
-        {
-            id: 1,
-            nome: "How i Met Your Mother"
-        },
-        {
-            id: 2,
-            nome: "Friends"
-        },
-        {
-            id: 3,
-            nome: "Two and a half man"
-        },
-    ]
-}
+
 
 export default function ShowList() {
+    const [listShows, setListShows] = useState(null);
+    useEffect(() => {
+        api.get("/shows").then((response) => {
+            setListShows(response.data)
+        });
+    }, [])
     return (
         <>
             <View style={styles.listStyle}>
                 <FlatList
-                    data={shows.items}
+                    keyExtractor={(item) => item.id}
+                    data={listShows}
                     renderItem={
                         ({ item }) => {
                             return (
                                 <TouchableOpacity onPress={() => { console.log(item.id) }}>
                                     <View style={styles.itemList}>
-                                        <Text> {item.nome}</Text>
+                                        <Text> {item.name}</Text>
                                     </View>
                                 </TouchableOpacity>
                             );
@@ -45,13 +38,12 @@ const styles = StyleSheet.create({
     },
     itemList: {
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         borderColor: 'grey',
         borderTopWidth: 1,
         backgroundColor: '#DCDCDC',
         borderBottomWidth: 1,
-
-
+        height: 30,
     },
 })
