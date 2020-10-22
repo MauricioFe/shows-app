@@ -22,6 +22,10 @@ export default Input;
 
 const styles = StyleSheet.create({
    textInputStyle:{
-       backgroundColor:"#d1cdcd"
+       backgroundColor:"#d1cdcd",
+       padding:5,
+       height:40,
+       marginBottom:10,
+       borderRadius:5,
    }
 })
