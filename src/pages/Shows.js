@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
     },
     detail: {
         flex: 1,
+        justifyContent: "center"
     },
 })
